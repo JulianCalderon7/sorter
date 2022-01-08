@@ -1,6 +1,15 @@
 import os
 
-CARPETA = r"C:\Users\Julian\Downloads"  # Carpeta a Ordenar
+"""
+Para utilizar, modificar las siguientes constantes a gusto.
+CARPETA : La ruta de la carpeta que se debe ordenar
+MAPA_DE_ARCHIVOS : Relaciona las extensiones de los archivos con la carpeta a la que deben pertenecer.
+                   Para agregar una regla, se deben agregar de la forma (NOMBRE_CARPETA, (EXTENSIONES*))
+DUPLICADOS : El nombre de la carpeta que contiene los archivos duplicados (por nombre)
+"""
+
+
+CARPETA = r"C:\Users\Julian\Downloads"
 MAPA_DE_ARCHIVOS = (
     ("Imagenes", (".jpeg", ".jpg", ".png", ".ico")),
     ("Documentos", (".pdf", ".pptx", ".log", ".docx", ".txt")),
