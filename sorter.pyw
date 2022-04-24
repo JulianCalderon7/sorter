@@ -20,7 +20,7 @@ MAPA_DE_ARCHIVOS = (
     ("Torrents", (".torrent")),
     ("Jars", (".jar")),
     ("Paquetes de microsoft", (".msu", ".msi")),
-    ("Codigo", (".py", ".c", ".h")),
+    ("Codigo", (".py", ".c", ".h", ".st")),
 )
 DUPLICADOS = "Duplicados"
 
