@@ -4,4 +4,4 @@ Ordena una carpeta del sistema a partir de las extensiones de cada archivo. No m
 
 Para modificar la ruta de la carpeta a ordenar y las reglas de su ordenamiento, ver __sorter.py__
 
-
+\\(O.O)//
