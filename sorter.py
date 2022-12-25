@@ -28,7 +28,7 @@ def sort_file(file: os.DirEntry):
     Sorts file into corresponding subfolder
     File should be sortable
     """
-    subfolder_path = subfolder_for_file(file)
+    subfolder_path = subdirectory_for_file(file)
     if subfolder_path == None:
         return
 
@@ -36,9 +36,9 @@ def sort_file(file: os.DirEntry):
     move(file.path, new_path)
 
 
-def subfolder_for_file(file: os.DirEntry) -> str:
+def subdirectory_for_file(file: os.DirEntry) -> str:
     """
-    Returns subdirectory for given file
+    Returns subdirectory path for given file
     Directory is created if needed
     """
 
