@@ -1,52 +1,92 @@
 import os
 
 
-class Sorter:
+DIRECTORY = r"C:\Users\gonza\Downloads"
+TYPE_MAP = (
+    ("Pictures", (".jpeg", ".jpg", ".png", ".ico")),
+    ("Documents", (".pdf", ".pptx", ".log", ".docx", ".txt")),
+    ("Audio", (".mp3", ".wav")),
+    ("Video", (".mp4", ".avi")),
+    ("Compressed", (".zip", ".rar", ".7z")),
+    ("Executables", (".msi", ".exe")),
+    ("Torrents", (".torrent")),
+    ("Code", (".py", ".c", ".h", ".st")),
+)
+
+
+def sort_directory(directory: str):
     """
-    Sorts all files in given folder into subfolders, by file extension
+    Sorts all files from working directory into subdirectories, by file extension
+    """
+    for file in os.scandir(directory):
+        if should_sort(file):
+            sort_file(file)
+
+
+def sort_file(file: os.DirEntry):
+    """
+    Sorts file into corresponding subfolder
+    File should be sortable
+    """
+    subfolder_path = subfolder_for_file(file)
+    if subfolder_path == None:
+        return
+
+    new_path = os.path.join(subfolder_path, file.name)
+    move(file.path, new_path)
+
+
+def subfolder_for_file(file: os.DirEntry) -> str:
+    """
+    Returns subdirectory for given file
+    Directory is created if needed
     """
 
-    TYPE_MAP = (
-        ("Pictures", (".jpeg", ".jpg", ".png", ".ico")),
-        ("Documents", (".pdf", ".pptx", ".log", ".docx", ".txt")),
-        ("Audio", (".mp3", ".wav")),
-        ("Video", (".mp4", ".avi")),
-        ("Compressed", (".zip", ".rar", ".7z")),
-        ("Executables", (".msi", ".exe")),
-        ("Torrents", (".torrent")),
-        ("Code", (".py", ".c", ".h", ".st")),
-    )
+    parent_dir = os.path.dirname(file.path)
+    extension = os.path.splitext(file.name)[1]
 
-    def __init__(self, folder):
-        self.path = folder
+    category = get_folder_for_extension(extension)
+    if category == None:
+        return None
 
-    def sort(self):
-        """ """
-        for file in os.scandir(self.path):
-            if self.should_sort(file):
-                self.sort_file(file)
+    category_path = os.path.join(parent_dir, category)
+    if not os.path.isdir(category_path):
+        os.mkdir(category_path)
 
-    def sort_file(self, file: os.DirEntry):
-        """
-        Sorts file into corresponding subfolder
-        File should be sortable
-        """
-        name, extension = os.path.splitext(file.path)
-        category = self.get_folder_for_extension(extension)
+    return category_path
 
-        print(f"sorting file {file.name}")
 
-    def get_folder_for_extension(self, extension: str) -> str:
-        """
-        Returns subfolder name for given file extension
-        Returns None on unknown extension
-        """
-        for category in self.TYPE_MAP:
-            if extension.lower() in category[1]:
-                return category[0]
+def get_folder_for_extension(extension: str) -> str:
+    """
+    Returns subfolder name for given file extension
+    Returns None on unknown extension
+    """
+    for category in TYPE_MAP:
+        if extension.lower() in category[1]:
+            return category[0]
 
-    def should_sort(self, file: os.DirEntry) -> bool:
-        """
-        Returns true if file should be sorted by sorter
-        """
-        return not file.is_dir()
+
+def should_sort(file: os.DirEntry) -> bool:
+    """
+    Returns true if file should be sorted by sorter
+    """
+    return not file.is_dir()
+
+
+def move(source: str, destination: str):
+    """
+    Moves file from source into destination
+    If file exists, it add a trailing (n) to the file name.
+    """
+
+    name, extension = os.path.splitext(destination)
+
+    i = 2
+    while os.path.exists(destination):
+        destination = f"{name} ({i}){extension}"
+        i += 1
+
+    os.rename(source, destination)
+
+
+sort_directory(DIRECTORY)
