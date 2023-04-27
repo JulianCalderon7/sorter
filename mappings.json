@@ -1,0 +1,55 @@
+{
+    "Imagenes": [
+        ".jpeg",
+        ".jpg",
+        ".png",
+        ".ico",
+        ".svg",
+        ".heic"
+    ],
+    "Documentos": [
+        ".pdf",
+        ".pptx",
+        ".log",
+        ".docx",
+        ".txt",
+        ".md",
+        ".csv"
+    ],
+    "Audio": [
+        ".mp3",
+        ".wav"
+    ],
+    "Video": [
+        ".mp4",
+        ".avi",
+        ".mov"
+    ],
+    "ZIPs": [
+        ".zip",
+        ".rar",
+        ".7z"
+    ],
+    "Ejecutables": [
+        ".exe",
+        ".EXE"
+    ],
+    "Binarios": [
+        ".jar",
+        ".msu",
+        ".msi",
+        ".iso"
+    ],
+    "Torrents": [
+        ".torrent"
+    ],
+    "Codigo": [
+        ".py",
+        ".c",
+        ".h",
+        ".st",
+        ".rs",
+        ".lock",
+        ".toml"
+    ]
+}
