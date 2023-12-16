@@ -1,6 +1,6 @@
-from pathlib import Path
 import argparse
 import json
+from pathlib import Path
 from typing import Dict, List
 
 from utils import move_file_to_folder
